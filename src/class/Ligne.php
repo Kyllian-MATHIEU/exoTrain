@@ -7,12 +7,14 @@ use App\class\ModeleTrain;
 class Ligne
 {
  private string $nom;
-
- public function __construct(string $nom, string $ligne, string $ajouterEtape, string $donneinfo){
+private Ville $villeDepart;
+private Ville $villeArrivee;
+private array $etape = [];
+ public function __construct(string $nom, Ville $villeDepart, Ville $villeArrivee)
+ {
      $this->nom = $nom;
-     $this-> ligne = $ligne;
-     $this-> ajouterEtape =  $donneinfo;
-     $this-> donneinfo = $donneinfo;
+     $this->villeDepart = $villeDepart;
+     $this->villeArrivee = $villeArrivee;
 
  }
 
@@ -21,23 +23,21 @@ class Ligne
         return $this->nom;
     }
 
-    public function getLigne(): string
+    public function ajouterEtape(Ville $ville, int $ordre): void
     {
-        return $this->ligne;
+        $this->etape[] = new Etape($ville, $ordre);
     }
 
-    public function getAjouterEtape(): string
-    {
-        return $this->ajouterEtape;
+    public function donneTexte() : string{
+        $texte = "Ligne ".$this->getNom()." : ".$this->villeDepart->getNom()." - ".$this->villeArrivee->getNom()."\n";
+
+        usort($this->etape, function ($a, $b) {
+            return $a->getOrdre() > $b->getOrdre();
+        });
+        foreach ($this->etape as $etape){
+            $texte .= "Etape ".$etape->getOrdre()." : ".$etape->getVille()->getNom()."\n";
+        }
+        return $texte;
     }
-
-
-    public function getDonneinfo(): string
-    {
-        return $this->donneinfo;
-    }
-
-
-
 
 }

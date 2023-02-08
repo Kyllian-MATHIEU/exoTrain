@@ -8,11 +8,9 @@ class ModeleTrain
     private string $libelle;
     private int    $vitesseMax;
 
-    public function __construct(string $libelle, int $vitesseMax, string $modeleTrain,string $donneInfo){
+    public function __construct(string $libelle, int $vitesseMax){
         $this->libelle      =$libelle;
         $this->vitesseMax   =$vitesseMax;
-        $this->modeleTrain  =$modeleTrain;
-        $this->donneInfo    =$donneInfo;
     }
 
     public function getLibelle(): string
@@ -27,17 +25,8 @@ class ModeleTrain
     }
 
 
-    public function getModeleTrain(): string
+    public function donneInfo():string
     {
-        return $this->modeleTrain;
+        return "Train ".$this->getLibelle()." Vitesse maximale  : ".$this->getVitesseMax()." km/h\n";
     }
-
-
-    public function getDonneInfo(): string
-    {
-        return $this->donneInfo;
-    }
-
-
-
 }

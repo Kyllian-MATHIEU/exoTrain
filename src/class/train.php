@@ -8,31 +8,25 @@ use App\class\ModeleTrain;
 class train
 {
     private string $numeroSerie;
+    private ModeleTrain $modele;
 
-    public function __construct(string $numeroSerie, string $train, string $donneInfo){
+    public function __construct(string $numeroSerie, ModeleTrain $modele)
+    {
 
         $this-> numeroSerie = $numeroSerie;
-        $this-> train = $train;
-        $this-> donneInfo = $donneInfo;
-
+        $this-> modele = $modele;
     }
 
     public function getnumeroSerie(): string{
         return $this->numeroSerie;
     }
 
-    public function getDonneInfo(): ModeleTrain
-    {
-        return $this->donneInfo;
+    public function getModele(): ModeleTrain{
+        return $this->modele;
     }
 
-    public function getTrain(): string
+    public function donneInfo(): string
     {
-        return $this->train;
+        return "Train ".$this->getnumeroSerie()." ".$this->getModele()->donneInfo();
     }
-
-
-
-
-
 }
